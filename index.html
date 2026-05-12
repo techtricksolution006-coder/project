@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="navbar__container">
+            <div class="navbar__logo">
+                <h1>Rishi Infotech</h1>
+            </div>
+            <nav class="navbar__menu">
+                <a href="#home" class="navbar__link active">Home</a>
+                <a href="#search" class="navbar__link">Search</a>
+                <a href="#status" class="navbar__link">Status</a>
+                <a href="login.html" class="navbar__link">API Service</a>
+                <a href="#" class="navbar__link">About</a>
+                <a href="#help" class="navbar__link">Help</a>
+                <a href="login.html" class="navbar__btn">Login</a>
+                <a href="signup.html" class="navbar__btn navbar__btn--secondary">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="search-section">
+            <div class="search-card">
+                <div class="search-header">
+                    <h2>Search Application</h2>
+                    <p>Search applied/paid applications only.</p>
+                    <p class="subtitle">Easily search through your application database with our powerful search interface.</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="search-id">
+                        <span class="tab-icon">🔍</span> Search by ID
+                    </button>
+                    <button class="tab-btn" data-tab="search-name">
+                        <span class="tab-icon">👤</span> Search by Name
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Search by ID Tab -->
+                    <div id="search-id" class="tab-pane active">
+                        <div class="form-group">
+                            <label for="appId">Application ID</label>
+                            <input 
+                                type="text" 
+                                id="appId" 
+                                class="form-control" 
+                                placeholder="Enter your application ID (12 digits)"
+                            >
+                            <small class="form-hint">Enter the unique application ID linked to your account</small>
+                        </div>
+                        <button class="search-btn">🔍 Check Status</button>
+                    </div>
+
+                    <!-- Search by Name Tab -->
+                    <div id="search-name" class="tab-pane">
+                        <div class="form-group">
+                            <label for="appName">Application Name</label>
+                            <input 
+                                type="text" 
+                                id="appName" 
+                                class="form-control" 
+                                placeholder="Enter application name or reference number"
+                            >
+                            <small class="form-hint">Search by your application name or reference</small>
+                        </div>
+                        <button class="search-btn">🔍 Search</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Rishi Infotech. All rights reserved</p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

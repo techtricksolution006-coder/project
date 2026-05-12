@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="signup-card">
+        <h1>Create your account</h1>
+        <p>Sign up to access your personalized dashboard. This is a simple signup interface for UI/UX flow.</p>
+        <form id="signupForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
+            <button type="submit">Sign Up</button>
+            <div id="signupMessage" class="message"></div>
+        </form>
+        <a href="index.html" class="back-link">Back to dashboard</a>
+    </div>
+    <script>
+        const signupForm = document.getElementById('signupForm');
+        const signupMessage = document.getElementById('signupMessage');
+
+        function showSignupMessage(text, isError = false) {
+            signupMessage.textContent = text;
+            signupMessage.style.display = 'block';
+            signupMessage.style.background = isError ? '#fee2e2' : '#dcfce7';
+            signupMessage.style.color = isError ? '#991b1b' : '#166534';
+        }
+
+        signupForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                showSignupMessage('Username and password are required.', true);
+                return;
+            }
+
+            const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+            const exists = storedUsers.some(user => user.username.toLowerCase() === username.toLowerCase());
+
+            if (exists) {
+                showSignupMessage('This username is already taken. Please choose another one.', true);
+                return;
+            }
+
+            storedUsers.push({ username, password });
+            localStorage.setItem('users', JSON.stringify(storedUsers));
+
+            showSignupMessage('Account created successfully! You can now log in.', false);
+            signupForm.reset();
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

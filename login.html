@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-card">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" autocomplete="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required>
+
+            <button type="submit">Sign In</button>
+            <div id="message" class="message"></div>
+            <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+        </form>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const messageEl = document.getElementById('message');
+
+        function showLoginMessage(text, isError = false) {
+            messageEl.textContent = text;
+            messageEl.className = 'message ' + (isError ? 'error' : 'success');
+        }
+
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+            const matchingUser = storedUsers.find(user => user.username.toLowerCase() === username.toLowerCase() && user.password === password);
+
+            if (matchingUser || (username === 'admin' && password === 'admin')) {
+                showLoginMessage('Login successful!');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } else {
+                showLoginMessage('Invalid username or password. Try your registered credentials or admin / admin.', true);
+            }
+        });
+    </script>
+</body>
+</html>
